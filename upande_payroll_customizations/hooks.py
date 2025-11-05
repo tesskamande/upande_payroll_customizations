@@ -242,3 +242,8 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+scheduler_events = {
+    "daily": [
+        "upande_payroll_customizations.employee_status_update.update_expired_employee_contracts"
+    ]
+}
