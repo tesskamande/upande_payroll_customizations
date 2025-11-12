@@ -46,7 +46,7 @@ def get_columns():
             "width": 150
         },
         {
-            "label": _("PAYE Deduction"),
+            "label": _("HELB Deduction"),
             "fieldname": "amount",
             "fieldtype": "currency",
             "width": 150
@@ -73,8 +73,8 @@ def get_data(filters):
             salary_details.amount.as_("amount")
         )
         .where(
-            (salary_details.salary_component == "PAYE")
-            
+            (salary_details.salary_component == "HELB Loan") &
+            (salary_details.amount != 0)
         )
     )
 

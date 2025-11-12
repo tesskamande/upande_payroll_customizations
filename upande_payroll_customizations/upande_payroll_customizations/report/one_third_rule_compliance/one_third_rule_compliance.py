@@ -92,7 +92,7 @@ def get_data(filters, company_currency):
 			salary_slip.net_pay,
 			salary_slip.total_deduction
 		)
-		.where(salary_slip.docstatus.isin([0, 1]))
+		.where(salary_slip.docstatus.isin([0]))
 	)
 
 	# Apply filters
