@@ -55,26 +55,26 @@ def get_columns():
 
 
 def get_data(filters):
-    """Fetch Housing Levy data from Salary Slips joined with Employee"""
     salary_slip = frappe.qb.DocType("Salary Slip")
     employee = frappe.qb.DocType("Employee")
     salary_details = frappe.qb.DocType("Salary Detail")
 
-    # Build query with aliases
+    # LEFT JOIN + filter PAYE inside ON clause
     query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
-        .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
+        .left_join(salary_details)
+            .on(
+                (salary_slip.name == salary_details.parent)
+                & (salary_details.salary_component == "PAYE")
+            )
         .select(
-            employee.custom_national_id.as_("custom_national_id"),
-            employee.employee_name.as_("full_name"),
             employee.employee_number.as_("employee_number"),
+            employee.employee_name.as_("full_name"),
+            employee.custom_national_id.as_("custom_national_id"),
             employee.custom_kra_pin.as_("custom_kra_pin"),
             salary_details.amount.as_("amount")
-        )
-        .where(
-            (salary_details.salary_component == "PAYE")
-            
+
         )
     )
 
@@ -82,15 +82,21 @@ def get_data(filters):
     if filters:
         if filters.get("from_date"):
             query = query.where(salary_slip.start_date >= filters.get("from_date"))
+
         if filters.get("to_date"):
             query = query.where(salary_slip.end_date <= filters.get("to_date"))
+
         if filters.get("company"):
             query = query.where(salary_slip.company == filters.get("company"))
+
         if filters.get("docstatus"):
-            docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
-            query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
+            doc_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
+            query = query.where(salary_slip.docstatus == doc_map[filters.get("docstatus")])
 
-
+    # Run final query
     data = query.run(as_dict=True)
-    
+        # Replace None with 0
+    for row in data:
+        row["amount"] = row.get("amount") or 0.00
+
     return data

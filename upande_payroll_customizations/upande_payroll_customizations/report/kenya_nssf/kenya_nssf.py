@@ -69,7 +69,7 @@ def get_data(filters):
     salary_details = frappe.qb.DocType("Salary Detail")
 
     # Fetch Tier 1 and Tier 2 amounts
-    nssf_data = (
+    query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
         .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
@@ -89,19 +89,20 @@ def get_data(filters):
     )
 
     # Apply filters
-    if filters:
-        if filters.get("from_date"):
-            query = nssf_data.where(salary_slip.start_date >= filters.get("from_date"))
-        if filters.get("to_date"):
-            query = nssf_data.where(salary_slip.end_date <= filters.get("to_date"))
-        if filters.get("company"):
-            query = nssf_data.where(salary_slip.company == filters.get("company"))
-        if filters.get("docstatus"):
-            docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
-            query = nssf_data.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
+    if filters.get("from_date"):
+        query = query.where(salary_slip.start_date >= filters.get("from_date"))
 
+    if filters.get("to_date"):
+        query = query.where(salary_slip.end_date <= filters.get("to_date"))
+
+    if filters.get("company"):
+        query = query.where(salary_slip.company == filters.get("company"))
+
+    if filters.get("docstatus"):
+        doc_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
+        query = query.where(salary_slip.docstatus == doc_map[filters.get("docstatus")])
 	
-    result_rows = nssf_data.run(as_dict=True)
+    result_rows = query.run(as_dict=True)
 
     # Sum Tier 1 + Tier 2 per employee
     totals = {}
