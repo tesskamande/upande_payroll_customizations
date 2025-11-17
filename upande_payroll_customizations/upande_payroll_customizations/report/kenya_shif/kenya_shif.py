@@ -22,19 +22,25 @@ def get_columns():
     """Define report columns with original labels"""
     return [
         {
-            "label": _("Payroll No"),
+            "label": _("PAYROLL NUMBER"),
             "fieldname": "employee_number",
             "fieldtype": "Data",
             "width": 120
         },
         {
-            "label": _("Employee"),
-            "fieldname": "full_name",
+            "label": _("FIRSTNAME"),
+            "fieldname": "first_and_middle_name",
             "fieldtype": "Data",
             "width": 250
         },
         {
-            "label": _("ID Number"),
+            "label": _("LASTNAME"),
+            "fieldname": "last_name",
+            "fieldtype": "Data",
+            "width": 150
+        },
+        {
+            "label": _("ID NO"),
             "fieldname": "custom_national_id",
             "fieldtype": "Data",
             "width": 150
@@ -46,9 +52,22 @@ def get_columns():
             "width": 150
         },
         {
-            "label": _("SHIF Deduction"),
+            "label": _("NHIF NO"),
+            "fieldname": "custom_nhif_number",
+            "fieldtype": "Data",
+            "width": 150
+        },
+        {
+            "label": _("CONTRIBUTION AMOUNT"),
             "fieldname": "amount",
-            "fieldtype": "currency",
+            "fieldtype": "Float",
+            "precision": 2,
+            "width": 150
+        },
+        {
+            "label": _("PHONE"),
+            "fieldname": "cell_number",
+            "fieldtype": "Data",
             "width": 150
         }
     ]
@@ -67,10 +86,13 @@ def get_data(filters):
         .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
         .select(
             employee.custom_national_id.as_("custom_national_id"),
-            employee.employee_name.as_("full_name"),
+            employee.last_name.as_("last_name"),
+            employee.employee_name.as_("employee_name"),  # fetch full name
             employee.employee_number.as_("employee_number"),
             employee.custom_kra_pin.as_("custom_kra_pin"),
-            salary_details.amount.as_("amount")
+            employee.custom_nhif_number.as_("custom_nhif_number"),
+            salary_details.amount.as_("amount"),
+            employee.cell_number.as_("cell_number")
         )
         .where(
             (salary_details.salary_component == "SHIF") &
@@ -90,7 +112,20 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+    result_rows = query.run(as_dict=True)
 
-    data = query.run(as_dict=True)
-    
+    # Split full name into first_and_middle_name and last_name
+    data = []
+    for row in result_rows:
+        data.append({
+            "custom_national_id": row.custom_national_id,
+            "last_name": row.last_name,
+            "first_and_middle_name": " ".join(row.employee_name.split(" ")[:-1]),
+            "employee_number": row.employee_number,
+            "custom_kra_pin": row.custom_kra_pin,
+            "custom_nhif_number": row.custom_nhif_number,
+            "amount": row.amount,
+            "cell_number": row.cell_number
+        })
+
     return data

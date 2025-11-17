@@ -38,13 +38,15 @@ def get_columns():
 		{
 			"label": _("Gross Pay"),
 			"fieldname": "gross_pay",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
+            "precision": 2,
 			"width": 120
 		},
 		{
 			"label": _("Net Pay"),
 			"fieldname": "net_pay",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
+            "precision": 2,
 			"width": 120
 		},
 		{
@@ -56,19 +58,22 @@ def get_columns():
 		{
 			"label": _("Deduction Amount"),
 			"fieldname": "deduction_amount",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
+            "precision": 2,
 			"width": 130
 		},
 		{
 			"label": _("1/3 Rule Threshold"),
 			"fieldname": "threshold",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
+            "precision": 2,
 			"width": 130
 		},
 		{
 			"label": _("Shortfall"),
 			"fieldname": "shortfall",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
+            "precision": 2,
 			"width": 120
 		}
 	]

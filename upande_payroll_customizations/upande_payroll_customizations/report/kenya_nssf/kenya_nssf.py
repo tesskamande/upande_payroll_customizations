@@ -24,19 +24,25 @@ def get_columns():
     """Define report columns"""
     return [
         {
-            "label": _("Payroll No"),
+            "label": _("PAYROLL NUMBER"),
             "fieldname": "employee_number",
             "fieldtype": "Data",
             "width": 120
         },
         {
-            "label": _("Employee Name"),
-            "fieldname": "full_name",
+            "label": _("SURNAME"),
+            "fieldname": "last_name",
             "fieldtype": "Data",
             "width": 250
         },
         {
-            "label": _("ID Number"),
+            "label": _("OTHER NAMES"),
+            "fieldname": "first_and_middle_name",
+            "fieldtype": "Data",
+            "width": 250
+        },
+        {
+            "label": _("ID NO"),
             "fieldname": "custom_national_id",
             "fieldtype": "Data",
             "width": 150
@@ -48,75 +54,69 @@ def get_columns():
             "width": 150
         },
         {
-            "label": _("NSSF Number"),
+            "label": _("NSSF NO"),
             "fieldname": "custom_nssf_number",
             "fieldtype": "Data",
             "width": 150
         },
+
         {
-            "label": _("NSSF Total"),
-            "fieldname": "nssf_total",
-            "fieldtype": "Currency",
+            "label": _("GROSS PAY"),
+            
+            "width": 150
+        },
+        {
+            "label": _("VOLUNTARY"),
+            "fieldtype": "Data",
             "width": 150
         }
+
     ]
 
 
 def get_data(filters):
-    """Fetch NSSF data from Salary Slips joined with Employee and sum Tier 1 & Tier 2"""
+    """Fetch employee NSSF data with voluntary hardcoded to 0"""
     salary_slip = frappe.qb.DocType("Salary Slip")
     employee = frappe.qb.DocType("Employee")
-    salary_details = frappe.qb.DocType("Salary Detail")
 
-    # Fetch Tier 1 and Tier 2 amounts
     query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
-        .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
         .select(
             employee.employee_number.as_("employee_number"),
             employee.employee_name.as_("full_name"),
             employee.custom_national_id.as_("custom_national_id"),
             employee.custom_kra_pin.as_("custom_kra_pin"),
             employee.custom_nssf_number.as_("custom_nssf_number"),
-            salary_details.salary_component.as_("component"),
-            salary_details.amount.as_("amount")
-        )
-        .where(
-            (salary_details.salary_component.isin(["NSSF Tier 1", "NSSF Tier2"]))
-            
+            salary_slip.gross_pay.as_("gross_pay")
         )
     )
 
     # Apply filters
     if filters.get("from_date"):
         query = query.where(salary_slip.start_date >= filters.get("from_date"))
-
     if filters.get("to_date"):
         query = query.where(salary_slip.end_date <= filters.get("to_date"))
-
     if filters.get("company"):
         query = query.where(salary_slip.company == filters.get("company"))
-
     if filters.get("docstatus"):
         doc_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
         query = query.where(salary_slip.docstatus == doc_map[filters.get("docstatus")])
-	
+
     result_rows = query.run(as_dict=True)
 
-    # Sum Tier 1 + Tier 2 per employee
-    totals = {}
+    # Prepare report-ready data
+    data = []
     for row in result_rows:
-        emp = row.employee_number
-        if emp not in totals:
-            totals[emp] = {
-                "employee_number": emp,
-                "full_name": row.full_name,
-                "custom_national_id": row.custom_national_id,
-                "custom_kra_pin": row.custom_kra_pin,
-                "custom_nssf_number": row.custom_nssf_number,
-                "nssf_total": 0
-            }
-        totals[emp]["nssf_total"] += row.amount
+        data.append({
+            "employee_number": row.employee_number,
+            "last_name": row.full_name.split(" ")[-1],
+            "first_and_middle_name": " ".join(row.full_name.split(" ")[:-1]),
+            "custom_national_id": row.custom_national_id,
+            "custom_kra_pin": row.custom_kra_pin,
+            "custom_nssf_number": row.custom_nssf_number,
+            "gross_pay": row.gross_pay or 0.0,
+            "voluntary": 0.0  
+        })
 
-    return list(totals.values())
+    return data

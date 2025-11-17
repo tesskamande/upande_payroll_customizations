@@ -54,7 +54,8 @@ def get_columns():
         {
             "label": _("Amount"),
             "fieldname": "amount",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
+            "precision": 2,
             "width": 120
         }
     ]
@@ -78,7 +79,7 @@ def get_data(filters):
             employee.bank_ac_no.as_("bank_ac_no"),
             salary_slip.net_pay.as_("amount")
         )
-        .where(salary_slip.docstatus == 1)  # Only submitted salary slips
+       
     )
 
     # Apply filters
@@ -91,6 +92,9 @@ def get_data(filters):
             query = query.where(salary_slip.company == filters.get("company"))
         if filters.get("bank"):
             query = query.where(employee.bank_name == filters.get("bank"))
+        if filters.get("docstatus"):
+            docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
+            query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
     salary_data = query.run(as_dict=True)
 

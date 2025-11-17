@@ -47,8 +47,8 @@ def get_columns():
         },
         {
             "label": _("SHIF Deduction"),
-            "fieldname": "amount",
-            "fieldtype": "currency",
+           "fieldtype": "Float",
+            "precision": 2,
             "width": 150
         }
     ]

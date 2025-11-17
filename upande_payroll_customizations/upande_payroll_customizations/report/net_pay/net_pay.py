@@ -1,13 +1,16 @@
 # Copyright (c) 2025, dev@upande.com and contributors
 # For license information, please see license.txt
 
+# Copyright (c) 2025, dev@upande.com and contributors
+# For license information, please see license.txt
+
 from __future__ import unicode_literals
-import frappe, erpnext
+import frappe
 from frappe import _
 
 
 def execute(filters=None):
-    """Main execution function for the Housing Levy report"""
+    """Main execution function for Net Pay report"""
     if filters and filters.get("from_date") and filters.get("to_date"):
         if filters.from_date > filters.to_date:
             frappe.throw(_("To Date cannot be before From Date: {}").format(filters.to_date))
@@ -19,63 +22,59 @@ def execute(filters=None):
 
 
 def get_columns():
-    """Define report columns with original labels"""
+    """Define report columns with multiline labels"""
     return [
         {
-            "label": _("Payroll No"),
+            "label": _("PAYROLL NUMBER"),
             "fieldname": "employee_number",
             "fieldtype": "Data",
             "width": 120
         },
         {
-            "label": _("Employee"),
+            "label": _("EMPLOYEE"),
             "fieldname": "full_name",
             "fieldtype": "Data",
             "width": 250
         },
         {
-            "label": _("ID Number"),
-            "fieldname": "custom_national_id",
-            "fieldtype": "Data",
+            "label": _("GROSS PAY"),
+            "fieldname": "gross_pay",
+            "fieldtype": "Float",
+            "precision": 2,
             "width": 150
         },
         {
-            "label": _("KRA PIN"),
-            "fieldname": "custom_kra_pin",
-            "fieldtype": "Data",
+            "label": _("TOTAL DEDUCTIONS"),
+            "fieldname": "total_deduction",
+            "fieldtype": "Float",
+            "precision": 2,
             "width": 150
         },
         {
-            "label": _("Housing Levy Deduction"),
-            "fieldname": "amount",
+            "label": _("NET PAY"),
+            "fieldname": "net_pay",
             "fieldtype": "Float",
             "precision": 2,
             "width": 150
         }
     ]
+        
 
 
 def get_data(filters):
-    """Fetch Housing Levy data from Salary Slips joined with Employee"""
+    """Fetch Net Pay, Gross Pay, and Total Deductions from Salary Slips"""
     salary_slip = frappe.qb.DocType("Salary Slip")
     employee = frappe.qb.DocType("Employee")
-    salary_details = frappe.qb.DocType("Salary Detail")
 
-    # Build query with aliases
     query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
-        .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
         .select(
-            employee.custom_national_id.as_("custom_national_id"),
-            employee.employee_name.as_("full_name"),
+            employee.employee_name.as_("employee_name"),
             employee.employee_number.as_("employee_number"),
-            employee.custom_kra_pin.as_("custom_kra_pin"),
-            salary_details.amount.as_("amount")
-        )
-        .where(
-            (salary_details.salary_component == "Housing Levy") &
-            (salary_details.amount != 0)
+            salary_slip.gross_pay.as_("gross_pay"),
+            salary_slip.total_deduction.as_("total_deduction"),
+            salary_slip.net_pay.as_("net_pay")
         )
     )
 
@@ -91,7 +90,22 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+    result_rows = query.run(as_dict=True)
 
-    data = query.run(as_dict=True)
-    
+    # Split full name into first_and_middle_name and last_name
+    data = []
+    for row in result_rows:
+        name_parts = row.employee_name.split(" ")
+        data.append({
+            "employee_number": row.employee_number,
+            "full_name": row.employee_name,
+            "gross_pay": row.gross_pay,
+            "total_deduction": row.total_deduction,
+            "net_pay": row.net_pay
+        })
+
     return data
+
+
+
+
