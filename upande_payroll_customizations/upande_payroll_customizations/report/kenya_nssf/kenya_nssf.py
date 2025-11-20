@@ -4,11 +4,8 @@
 from __future__ import unicode_literals
 import frappe, erpnext
 from frappe import _
-<<<<<<< Updated upstream
-=======
 import re
 
->>>>>>> Stashed changes
 
 def execute(filters=None):
     
@@ -59,10 +56,6 @@ def get_columns():
             "width": 150
         },
         {
-<<<<<<< Updated upstream
-            "label": _("NSSF Total"),
-            "fieldname": "nssf_total",
-=======
             "label": _("GROSS PAY"),
             "fieldname": "gross_pay",
             "fieldtype": "Currency",
@@ -71,7 +64,6 @@ def get_columns():
         {
             "label": _("VOLUNTARY"),
             "fieldname": "voluntary",
->>>>>>> Stashed changes
             "fieldtype": "Currency",
             "width": 150
         }
@@ -124,32 +116,12 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = nssf_data.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
-<<<<<<< Updated upstream
-	
-    result_rows = nssf_data.run(as_dict=True)
-=======
     query = query.orderby(employee.employee_number)
     result_rows = query.run(as_dict=True)
->>>>>>> Stashed changes
 
     # Sum Tier 1 + Tier 2 per employee
     totals = {}
     for row in result_rows:
-<<<<<<< Updated upstream
-        emp = row.employee_number
-        if emp not in totals:
-            totals[emp] = {
-                "employee_number": emp,
-                "full_name": row.full_name,
-                "custom_national_id": row.custom_national_id,
-                "custom_kra_pin": row.custom_kra_pin,
-                "custom_nssf_number": row.custom_nssf_number,
-                "nssf_total": 0
-            }
-        totals[emp]["nssf_total"] += row.amount
-
-    return list(totals.values())
-=======
         # Split name into surname and other names
         name_parts = row.full_name.split(" ") if row.full_name else ["", ""]
         last_name = name_parts[-1] if len(name_parts) > 0 else ""
@@ -170,4 +142,3 @@ def get_data(filters):
     data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
 
     return data
->>>>>>> Stashed changes

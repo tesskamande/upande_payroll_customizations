@@ -68,11 +68,7 @@ def get_data(filters):
         .select(
             employee.employee_number.as_("employee_number"),  # Keep as string
             employee.employee_name.as_("full_name"),
-<<<<<<< Updated upstream
-            employee.employee_number.as_("employee_number"),
-=======
             employee.custom_national_id.as_("custom_national_id"),
->>>>>>> Stashed changes
             employee.custom_kra_pin.as_("custom_kra_pin"),
             salary_details.amount.as_("amount")
         )
@@ -94,12 +90,6 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
-<<<<<<< Updated upstream
-
-    data = query.run(as_dict=True)
-    
-    return data
-=======
     # Sort by employee_number as string (will sort alphabetically: PK1, PK10, PK2, PK29, PK3, PK30)
     # For better numeric sorting, extract the number part
     query = query.orderby(employee.employee_number)
@@ -118,4 +108,3 @@ def get_data(filters):
     data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
     
     return data
->>>>>>> Stashed changes
