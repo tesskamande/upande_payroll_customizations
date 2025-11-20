@@ -60,15 +60,19 @@ def get_data(filters):
     employee = frappe.qb.DocType("Employee")
     salary_details = frappe.qb.DocType("Salary Detail")
 
-    # Build query with aliases
+    # Build query - employee_number is now a string (PK29, PK30, etc.)
     query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
         .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
         .select(
-            employee.custom_national_id.as_("custom_national_id"),
+            employee.employee_number.as_("employee_number"),  # Keep as string
             employee.employee_name.as_("full_name"),
+<<<<<<< Updated upstream
             employee.employee_number.as_("employee_number"),
+=======
+            employee.custom_national_id.as_("custom_national_id"),
+>>>>>>> Stashed changes
             employee.custom_kra_pin.as_("custom_kra_pin"),
             salary_details.amount.as_("amount")
         )
@@ -90,7 +94,28 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+<<<<<<< Updated upstream
 
     data = query.run(as_dict=True)
     
     return data
+=======
+    # Sort by employee_number as string (will sort alphabetically: PK1, PK10, PK2, PK29, PK3, PK30)
+    # For better numeric sorting, extract the number part
+    query = query.orderby(employee.employee_number)
+
+    data = query.run(as_dict=True)
+    
+    # Optional: Sort data by numeric part of employee_number for better ordering
+    # This ensures PK1, PK2, PK3, ... PK10, ... PK29, PK30
+    def get_numeric_part(emp_num):
+        if emp_num:
+            import re
+            match = re.search(r'\d+', emp_num)
+            return int(match.group()) if match else 0
+        return 0
+    
+    data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
+    
+    return data
+>>>>>>> Stashed changes

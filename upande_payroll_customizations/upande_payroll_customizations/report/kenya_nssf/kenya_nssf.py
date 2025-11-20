@@ -4,6 +4,11 @@
 from __future__ import unicode_literals
 import frappe, erpnext
 from frappe import _
+<<<<<<< Updated upstream
+=======
+import re
+
+>>>>>>> Stashed changes
 
 def execute(filters=None):
     
@@ -54,12 +59,31 @@ def get_columns():
             "width": 150
         },
         {
+<<<<<<< Updated upstream
             "label": _("NSSF Total"),
             "fieldname": "nssf_total",
+=======
+            "label": _("GROSS PAY"),
+            "fieldname": "gross_pay",
+            "fieldtype": "Currency",
+            "width": 150
+        },
+        {
+            "label": _("VOLUNTARY"),
+            "fieldname": "voluntary",
+>>>>>>> Stashed changes
             "fieldtype": "Currency",
             "width": 150
         }
     ]
+
+
+def get_numeric_part(emp_num):
+    """Extract numeric part from employee number for proper sorting"""
+    if emp_num:
+        match = re.search(r'\d+', str(emp_num))
+        return int(match.group()) if match else 0
+    return 0
 
 
 def get_data(filters):
@@ -100,12 +124,18 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = nssf_data.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+<<<<<<< Updated upstream
 	
     result_rows = nssf_data.run(as_dict=True)
+=======
+    query = query.orderby(employee.employee_number)
+    result_rows = query.run(as_dict=True)
+>>>>>>> Stashed changes
 
     # Sum Tier 1 + Tier 2 per employee
     totals = {}
     for row in result_rows:
+<<<<<<< Updated upstream
         emp = row.employee_number
         if emp not in totals:
             totals[emp] = {
@@ -119,3 +149,25 @@ def get_data(filters):
         totals[emp]["nssf_total"] += row.amount
 
     return list(totals.values())
+=======
+        # Split name into surname and other names
+        name_parts = row.full_name.split(" ") if row.full_name else ["", ""]
+        last_name = name_parts[-1] if len(name_parts) > 0 else ""
+        first_and_middle = " ".join(name_parts[:-1]) if len(name_parts) > 1 else ""
+        
+        data.append({
+            "employee_number": row.employee_number,
+            "last_name": last_name,
+            "first_and_middle_name": first_and_middle,
+            "custom_national_id": row.custom_national_id,
+            "custom_kra_pin": row.custom_kra_pin,
+            "custom_nssf_number": row.custom_nssf_number,
+            "gross_pay": row.gross_pay or 0.0,
+            "voluntary": 0.0  
+        })
+    
+    # Sort by numeric part of employee_number for proper ordering (PK1, PK2, ... PK29, PK30)
+    data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
+
+    return data
+>>>>>>> Stashed changes

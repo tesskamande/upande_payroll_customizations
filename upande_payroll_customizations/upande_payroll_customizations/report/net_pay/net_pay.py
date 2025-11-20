@@ -2,16 +2,13 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import frappe, erpnext
+import frappe
 from frappe import _
-<<<<<<< Updated upstream
-=======
 import re
->>>>>>> Stashed changes
 
 
 def execute(filters=None):
-    """Main execution function for the SHIF report"""
+    """Main execution function for Net Pay report"""
     if filters and filters.get("from_date") and filters.get("to_date"):
         if filters.from_date > filters.to_date:
             frappe.throw(_("To Date cannot be before From Date: {}").format(filters.to_date))
@@ -23,47 +20,39 @@ def execute(filters=None):
 
 
 def get_columns():
-    """Define report columns with original labels"""
+    """Define report columns with multiline labels"""
     return [
         {
-            "label": _("Payroll No"),
+            "label": _("PAYROLL NUMBER"),
             "fieldname": "employee_number",
             "fieldtype": "Data",
             "width": 120
         },
         {
-            "label": _("Employee"),
+            "label": _("EMPLOYEE"),
             "fieldname": "full_name",
             "fieldtype": "Data",
             "width": 250
         },
         {
-            "label": _("ID Number"),
-            "fieldname": "custom_national_id",
-            "fieldtype": "Data",
-            "width": 150
-        },
-        {
-            "label": _("KRA PIN"),
-            "fieldname": "custom_kra_pin",
-            "fieldtype": "Data",
-            "width": 150
-        },
-        {
-            "label": _("SHIF Deduction"),
-            "fieldname": "amount",
-<<<<<<< Updated upstream
-            "fieldtype": "currency",
-=======
+            "label": _("GROSS PAY"),
+            "fieldname": "gross_pay",
             "fieldtype": "Currency",
             "precision": 2,
             "width": 150
         },
         {
-            "label": _("PHONE"),
-            "fieldname": "cell_number",
-            "fieldtype": "Data",
->>>>>>> Stashed changes
+            "label": _("TOTAL DEDUCTIONS"),
+            "fieldname": "total_deduction",
+            "fieldtype": "Currency",
+            "precision": 2,
+            "width": 150
+        },
+        {
+            "label": _("NET PAY"),
+            "fieldname": "net_pay",
+            "fieldtype": "Currency",
+            "precision": 2,
             "width": 150
         }
     ]
@@ -78,33 +67,19 @@ def get_numeric_part(emp_num):
 
 
 def get_data(filters):
-    """Fetch SHIF data from Salary Slips joined with Employee"""
+    """Fetch Net Pay, Gross Pay, and Total Deductions from Salary Slips"""
     salary_slip = frappe.qb.DocType("Salary Slip")
     employee = frappe.qb.DocType("Employee")
-    salary_details = frappe.qb.DocType("Salary Detail")
 
-    # Build query - employee_number is now a string (PK29, PK30, etc.)
     query = (
         frappe.qb.from_(salary_slip)
         .inner_join(employee).on(salary_slip.employee == employee.name)
-        .inner_join(salary_details).on(salary_slip.name == salary_details.parent)
         .select(
-<<<<<<< Updated upstream
-            employee.custom_national_id.as_("custom_national_id"),
-            employee.employee_name.as_("full_name"),
+            employee.employee_name.as_("employee_name"),
             employee.employee_number.as_("employee_number"),
-=======
-            employee.employee_number.as_("employee_number"),  # Keep as string
-            employee.employee_name.as_("employee_name"),  # fetch full name
-            employee.last_name.as_("last_name"),
-            employee.custom_national_id.as_("custom_national_id"),
->>>>>>> Stashed changes
-            employee.custom_kra_pin.as_("custom_kra_pin"),
-            salary_details.amount.as_("amount")
-        )
-        .where(
-            (salary_details.salary_component == "SHA") &
-            (salary_details.amount != 0)
+            salary_slip.gross_pay.as_("gross_pay"),
+            salary_slip.total_deduction.as_("total_deduction"),
+            salary_slip.net_pay.as_("net_pay")
         )
     )
 
@@ -120,36 +95,22 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
-<<<<<<< Updated upstream
-
-    data = query.run(as_dict=True)
-    
-    return data
-=======
     # Sort alphabetically first (will be sorted numerically later in Python)
     query = query.orderby(employee.employee_number)
     result_rows = query.run(as_dict=True)
 
-    # Split full name into first_and_middle_name and last_name
+    # Process data
     data = []
     for row in result_rows:
-        # Split name into parts
-        name_parts = row.employee_name.split(" ") if row.employee_name else ["", ""]
-        first_and_middle = " ".join(name_parts[:-1]) if len(name_parts) > 1 else row.employee_name
-        
         data.append({
             "employee_number": row.employee_number,
-            "first_and_middle_name": first_and_middle,
-            "last_name": row.last_name,
-            "custom_national_id": row.custom_national_id,
-            "custom_kra_pin": row.custom_kra_pin,
-            "custom_nhif_number": row.custom_nhif_number,
-            "amount": row.amount,
-            "cell_number": row.cell_number
+            "full_name": row.employee_name,
+            "gross_pay": row.gross_pay or 0.0,
+            "total_deduction": row.total_deduction or 0.0,
+            "net_pay": row.net_pay or 0.0
         })
 
     # Sort by numeric part of employee_number for proper ordering (PK1, PK2, ... PK29, PK30)
     data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
 
     return data
->>>>>>> Stashed changes
