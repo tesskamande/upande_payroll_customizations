@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-
+from pypika.functions import Cast
 
 def execute(filters=None):
     """Main execution function for Payroll Deductions Report"""
@@ -138,9 +138,8 @@ def get_data(filters):
         if filters.get("docstatus"):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
-
-    query = query.orderby(employee.employee_number)
-
+    
+    query = query.orderby(Cast(employee.employee_number, "int"))
     result_rows = query.run(as_dict=True)
 
     # Get all deduction components

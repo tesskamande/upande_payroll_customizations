@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 import frappe, erpnext
 from frappe import _
+from pypika.functions import Cast
 
 
 def execute(filters=None):
@@ -90,7 +91,7 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
-
+    query = query.orderby(Cast(employee.employee_number, "int"))
     data = query.run(as_dict=True)
     
     return data

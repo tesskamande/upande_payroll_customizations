@@ -247,3 +247,4 @@ scheduler_events = {
         "upande_payroll_customizations.employee_status_update.update_expired_employee_contracts"
     ]
 }
+

@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
+from pypika.functions import Cast
 
 
 def execute(filters=None):
@@ -179,7 +180,7 @@ def get_earnings_components(filters):
         if filters.get("docstatus"):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
-
+    
     result = query.run(as_dict=True)
     return [row.salary_component for row in result]
 
@@ -208,6 +209,7 @@ def get_deduction_components(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+    
     result = query.run(as_dict=True)
     return [row.salary_component for row in result]
 
@@ -349,5 +351,6 @@ def get_data(filters):
             if key not in ["employee_number", "full_name"]:
                 emp[key] = round(float(emp[key]), 2)
         data.append(emp)
-    
+
+    data = sorted(data, key=lambda x: int(x.get("employee_number", 0)))
     return data

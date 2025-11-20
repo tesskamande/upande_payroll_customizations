@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 import frappe, erpnext
 from frappe import _
+from pypika.functions import Cast
 
 
 def execute(filters=None):
@@ -24,7 +25,7 @@ def get_columns():
         {
             "label": _("Payroll No"),
             "fieldname": "employee_number",
-            "fieldtype": "Data",
+            "fieldtype": "Int",
             "width": 120
         },
         {
@@ -69,7 +70,7 @@ def get_data(filters):
         .select(
             employee.custom_national_id.as_("custom_national_id"),
             employee.employee_name.as_("full_name"),
-            employee.employee_number.as_("employee_number"),
+            Cast(employee.employee_number, "int").as_("employee_number"),
             employee.custom_kra_pin.as_("custom_kra_pin"),
             salary_details.amount.as_("amount")
         )
@@ -91,6 +92,8 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
+    # Add numeric sorting - THIS WAS MISSING
+    query = query.orderby(Cast(employee.employee_number, "int"))
 
     data = query.run(as_dict=True)
     

@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 import frappe, erpnext
 from frappe import _
+from pypika.functions import Cast
 
 
 def execute(filters=None):
@@ -108,6 +109,7 @@ def get_data(filters, company_currency):
 	if filters.get("company"):
 		query = query.where(salary_slip.company == filters.get("company"))
 
+	query = query.orderby(Cast(employee.employee_number, "int"))
 	salary_data = query.run(as_dict=True)
 	results = []
 
