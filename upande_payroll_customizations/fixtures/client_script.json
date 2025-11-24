@@ -20,16 +20,5 @@
   "name": "employee update",
   "script": "frappe.ui.form.on('Employee', {\n    onload: function(frm) {\n        if (frm.is_new() && !frm.doc.employee_number) {\n            frm.set_value('employee_number', 'Generating...');\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: {\n                    doctype: 'Employee',\n                    fields: ['employee_number'],\n                    filters: [\n                        ['employee_number', 'is', 'set'],\n                        ['employee_number', '!=', '']\n                    ],\n                    limit_page_length: 1000\n                },\n                callback: function(r) {\n                    let nextNumber = 1;\n                    if (r.message && r.message.length > 0) {\n                        // Extract numeric part only, ignoring any prefix (like PK)\n                        const numbers = r.message.map(e => {\n                            const match = e.employee_number.match(/\\d+/);\n                            return match ? parseInt(match[0]) : 0;\n                        });\n                        const maxNum = Math.max(...numbers);\n                        if (!isNaN(maxNum)) {\n                            nextNumber = maxNum + 1;\n                        }\n                    }\n                    // ✅ Add PK prefix to the number\n                    frm.set_value('employee_number', 'PK' + nextNumber.toString());\n                    console.log(\"Generated employee number:\", 'PK' + nextNumber);\n                }\n            });\n        }\n    }\n});",
   "view": "Form"
- },
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Salary Slip",
-  "enabled": 1,
-  "modified": "2025-11-19 02:11:07.764009",
-  "module": null,
-  "name": "1/3 Rule Breach",
-  "script": "frappe.ui.form.on('Salary Slip', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})",
-  "view": "Form"
  }
 ]

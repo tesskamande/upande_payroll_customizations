@@ -248,12 +248,119 @@ scheduler_events = {
     ]
 }
 fixtures = [
-    {"dt": "Custom Field"},
-    {"dt": "Property Setter"},
-    {"dt": "Server Script"},
-    {"dt": "Client Script"},
-    {"dt": "Print Format"},
-    {"dt": "Salary Component"},
-    {"dt": "Salary Structure"},
-    {"dt": "Report"}
+    {
+        "dt": "Server Script",
+        "filters": [
+            ["name", "in", [
+                "Recurring Deductions",
+                "Employee_naming_change",
+                "Warnings"
+            ]]
+        ]
+    },
+
+    {
+        "dt": "Client Script",
+        "filters": [
+            ["name", "in", [
+                "Warnings Script",
+                "employee update"
+            ]]
+        ]
+    },
+    
+    {
+        "dt": "Print Format",
+        "filters": [
+            ["name", "in", [
+                "Salary Slip - Kikwetu",
+                "Summary Dismissal Letter",
+                "Disciplinary Letter",
+                "Warning Letter"
+            ]]
+        ]
+    },
+
+    {
+        "dt": "Salary Component",
+        "filters": [
+            ["name", "in", [
+                "Employer NSSF Tier 2",
+                "Employer Nssf Tier1",
+                "Employer Housing Levy",
+                "Holiday Overtime",
+                "Taxable Income",
+                "Personal Relief",
+                "Gross Paye",
+                "PAYEBand4",
+                "PAYEBand3",
+                "PAYEBand2",
+                "PAYEBand1",
+                "Gross Salary",
+                "Pension Deduction",
+                "PAYE",
+                "Sacco Shares",
+                "Sacco Loan",
+                "Sacco Advance",
+                "Money Cloud",
+                "HELB Loan",
+                "Welfare",
+                "Housing Levy",
+                "SHA",
+                "NSSF Tier 2",
+                "NSSF Tier 1",
+                "Lunch",
+                "Travelling Allowance",
+                "Cold Room Allowance",
+                "Basic Pay",
+                "Chemical Allowance",
+                "Loading Allowance",
+                "Overtime",
+                "Responsibility Allowance",
+                "Grading Bonus",
+                "House Allowance",
+                "Transport Allowance",
+                "Leave Encashment",
+                "Arrears",
+                "Income Tax"
+            ]]
+        ]
+    },
+
+    {
+        "dt": "Salary Structure",
+        "filters": [
+            ["name", "in", [
+                "Permanent",
+                "Permanent2",
+                "Permanent4"
+            ]]
+        ]
+    },
+
+    {
+        "dt": "Report",
+        "filters": [
+            ["name", "in", [
+                "Kenya Housing Levy",
+                "Kenya SHIF",
+                "Kenya NSSF",
+                "NET PAY",
+                "Payroll Allowances",
+                "Payroll Deductions",
+                "Muster Roll Payroll Report",
+                "Kenya P10 Tax"
+            ]]
+        ]
+    },
+
+    {
+        "dt": "DocType",
+        "filters": [
+            ["name", "in", [
+                "Disciplinary",
+                "Recurring Deductions"
+            ]]
+        ]
+    }
 ]
