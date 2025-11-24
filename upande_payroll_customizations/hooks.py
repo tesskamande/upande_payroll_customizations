@@ -247,3 +247,13 @@ scheduler_events = {
         "upande_payroll_customizations.employee_status_update.update_expired_employee_contracts"
     ]
 }
+fixtures = [
+    {"dt": "Custom Field"},
+    {"dt": "Property Setter"},
+    {"dt": "Server Script"},
+    {"dt": "Client Script"},
+    {"dt": "Print Format"},
+    {"dt": "Salary Component"},
+    {"dt": "Salary Structure"},
+    {"dt": "Report"}
+]
