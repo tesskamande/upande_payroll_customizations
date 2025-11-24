@@ -47,3 +47,4 @@ def update_expired_employee_contracts():
     
     if employees:
         frappe.logger().info(f"Successfully updated {len(employees)} employees to Inactive status")
+        
