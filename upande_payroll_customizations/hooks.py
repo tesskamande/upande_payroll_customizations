@@ -255,6 +255,7 @@ fixtures = [
                 "Recurring Deductions",
                 "Employee_naming_change",
                 "Warnings"
+                "Send Daily Report"
             ]]
         ]
     },
