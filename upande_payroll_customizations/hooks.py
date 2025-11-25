@@ -254,7 +254,7 @@ fixtures = [
             ["name", "in", [
                 "Recurring Deductions",
                 "Employee_naming_change",
-                "Warnings"
+                "Warnings",
                 "Send Daily Report"
             ]]
         ]
