@@ -333,7 +333,6 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "Permanent",
-                "Permanent2",
                 "Permanent4"
             ]]
         ]
