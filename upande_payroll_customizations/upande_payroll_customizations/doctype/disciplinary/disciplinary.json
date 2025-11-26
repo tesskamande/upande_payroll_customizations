@@ -4,6 +4,7 @@
  "autoname": "prompt",
  "creation": "2025-11-18 01:09:33.090451",
  "doctype": "DocType",
+ "custom": 1,
  "engine": "InnoDB",
  "field_order": [
   "employee",
