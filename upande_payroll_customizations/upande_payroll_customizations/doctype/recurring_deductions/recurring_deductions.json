@@ -4,6 +4,7 @@
  "creation": "2025-11-05 10:56:26.332985",
  "doctype": "DocType",
  "editable_grid": 1,
+ "custom": 1,
  "engine": "InnoDB",
  "field_order": [
   "deduction_type",
