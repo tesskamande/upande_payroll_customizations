@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "custom": 1,
  "creation": "2025-10-24 11:45:08.126698",
  "doctype": "DocType",
  "engine": "InnoDB",

@@ -2,6 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
+ "custom": 1,
  "creation": "2025-10-24 11:38:01.634407",
  "doctype": "DocType",
  "engine": "InnoDB",
