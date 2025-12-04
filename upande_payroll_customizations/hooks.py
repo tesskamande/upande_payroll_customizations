@@ -248,3 +248,17 @@ scheduler_events = {
     ]
 }
 
+fixtures =[
+    "Server Script",
+    "Client Script",
+    "Custom Field",
+    "Workflow",
+    "Workflow State",
+    "Workflow Action",
+    "Salary Structure",
+    "Salary Component",
+    "Print Format",
+    "Role",
+    "Has Role"
+
+]

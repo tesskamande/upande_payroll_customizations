@@ -1,0 +1,722 @@
+[
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-16 19:55:29.017480",
+  "name": "50gto7kpmd",
+  "permitted_roles": [
+   {
+    "parent": "50gto7kpmd",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Employee edit"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3295",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-17 14:11:45.137268",
+  "name": "7bdtgo5a5m",
+  "permitted_roles": [
+   {
+    "parent": "7bdtgo5a5m",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Employee edit"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4502",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "mary.gakonyo@tambuzi.co.ke",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-17 22:13:33.127399",
+  "name": "1l5kh8goas",
+  "permitted_roles": [
+   {
+    "parent": "1l5kh8goas",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3295",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-17 22:13:40.674620",
+  "name": "1ng4tg3s1d",
+  "permitted_roles": [
+   {
+    "parent": "1ng4tg3s1d",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3295",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:17:06.189283",
+  "name": "mantcq8pog",
+  "permitted_roles": [
+   {
+    "parent": "mantcq8pog",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3590",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:18:05.090510",
+  "name": "mt4nddltsb",
+  "permitted_roles": [
+   {
+    "parent": "mt4nddltsb",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3590",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:19:03.858252",
+  "name": "nfg9dt5m4a",
+  "permitted_roles": [
+   {
+    "parent": "nfg9dt5m4a",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "3590",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:37:44.935874",
+  "name": "2drv0l86gs",
+  "permitted_roles": [
+   {
+    "parent": "2drv0l86gs",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4617",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:37:55.443183",
+  "name": "2h4dpnf1br",
+  "permitted_roles": [
+   {
+    "parent": "2h4dpnf1br",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4617",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:38:07.342428",
+  "name": "2kr0n10a26",
+  "permitted_roles": [
+   {
+    "parent": "2kr0n10a26",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4617",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:58:23.822253",
+  "name": "eh0363jr8i",
+  "permitted_roles": [
+   {
+    "parent": "eh0363jr8i",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4625",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:58:29.542660",
+  "name": "eip98lptrr",
+  "permitted_roles": [
+   {
+    "parent": "eip98lptrr",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4625",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 13:58:46.361036",
+  "name": "eo1h4e423t",
+  "permitted_roles": [
+   {
+    "parent": "eo1h4e423t",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4625",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:25:57.764059",
+  "name": "ultk2pl5f2",
+  "permitted_roles": [
+   {
+    "parent": "ultk2pl5f2",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4178",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:26:12.561367",
+  "name": "uqjcm91alh",
+  "permitted_roles": [
+   {
+    "parent": "uqjcm91alh",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4178",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:26:43.217999",
+  "name": "v43pt6t5md",
+  "permitted_roles": [
+   {
+    "parent": "v43pt6t5md",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4178",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:33:34.588319",
+  "name": "34kj0u8fhh",
+  "permitted_roles": [
+   {
+    "parent": "34kj0u8fhh",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4615",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:33:48.231207",
+  "name": "38tv1eu35m",
+  "permitted_roles": [
+   {
+    "parent": "38tv1eu35m",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4615",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-21 14:34:01.703891",
+  "name": "3d8m2nerp2",
+  "permitted_roles": [
+   {
+    "parent": "3d8m2nerp2",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4615",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 21:12:37.325566",
+  "name": "omr2ub7gp1",
+  "permitted_roles": [
+   {
+    "parent": "omr2ub7gp1",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4178",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Pending"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:01:46.187815",
+  "name": "lg75tom4ub",
+  "permitted_roles": [
+   {
+    "parent": "lg75tom4ub",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "445",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:02:49.833547",
+  "name": "m44a309d6b",
+  "permitted_roles": [
+   {
+    "parent": "m44a309d6b",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "445",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:02:55.697159",
+  "name": "m5u2uo1l3p",
+  "permitted_roles": [
+   {
+    "parent": "m5u2uo1l3p",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "445",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:03:32.333292",
+  "name": "mhde7e6v9a",
+  "permitted_roles": [
+   {
+    "parent": "mhde7e6v9a",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "1470",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:14:12.515676",
+  "name": "spea2jicp5",
+  "permitted_roles": [
+   {
+    "parent": "spea2jicp5",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "1470",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-22 22:14:19.321870",
+  "name": "srj3f61lk0",
+  "permitted_roles": [
+   {
+    "parent": "srj3f61lk0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "1470",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-23 14:49:22.234519",
+  "name": "3soh4pm2r7",
+  "permitted_roles": [
+   {
+    "parent": "3soh4pm2r7",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "445",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Pending"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-24 22:59:56.087291",
+  "name": "f2qccqi6em",
+  "permitted_roles": [
+   {
+    "parent": "f2qccqi6em",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   },
+   {
+    "parent": "f2qccqi6em",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "2684",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Non-management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 10:51:27.594472",
+  "name": "7fuo694499",
+  "permitted_roles": [
+   {
+    "parent": "7fuo694499",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4626",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Management_employee_creation",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 10:51:49.597045",
+  "name": "7mqlios4rr",
+  "permitted_roles": [
+   {
+    "parent": "7mqlios4rr",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4626",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending Approval"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 10:52:04.635662",
+  "name": "7rgai9g5c6",
+  "permitted_roles": [
+   {
+    "parent": "7rgai9g5c6",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4626",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 11:17:38.754099",
+  "name": "mqtkm1l50r",
+  "permitted_roles": [
+   {
+    "parent": "mqtkm1l50r",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4174",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 11:32:39.008456",
+  "name": "vk8qgkokua",
+  "permitted_roles": [
+   {
+    "parent": "vk8qgkokua",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4244",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-11-27 12:24:19.664782",
+  "name": "tt5k3m23q7",
+  "permitted_roles": [
+   {
+    "parent": "tt5k3m23q7",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Non-management_employee_creation"
+   }
+  ],
+  "reference_doctype": "Employee",
+  "reference_name": "4175",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Approved"
+ }
+]
