@@ -38,16 +38,16 @@ def get_columns(filters):
 
     # Define the order of earnings components
     earnings_order = [
-        "Basic salary",
-        "Cash Housing Allowance",
-        "Travel Allowance"
+        "Basic Pay",
+        "House Allowance",
+        "Transport Allowance"
     ]
 
     # Define the order of deduction components
     deduction_order = [
         "Housing Levy",
-        "NSSF TIER 1",
-        "NSSF TIER2",
+        "NSSF Tier 1",
+        "NSSF Tier 2",
         "SHIF",
         "PAYE"
     ]
@@ -352,5 +352,5 @@ def get_data(filters):
                 emp[key] = round(float(emp[key]), 2)
         data.append(emp)
 
-    data = sorted(data, key=lambda x: int(x.get("employee_number", 0)))
+    data = sorted(data, key=lambda x: x.get("employee_number", ""))
     return data

@@ -90,7 +90,7 @@ def get_data(filters):
             salary_details.amount.as_("amount")
         )
         .where(
-            (salary_details.salary_component == "SHA") &
+            (salary_details.salary_component == "SHIF") &
             (salary_details.amount != 0)
         )
     )

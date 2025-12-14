@@ -40,7 +40,7 @@ frappe.query_reports["Bank Payment Remittance"] = {
 			"fieldname":"docstatus",
 			"label":__("Document Status"),
 			"fieldtype":"Select",
-			"options":["Submitted"],
+			"options":["Draft", "Submitted", "Cancelled"],
 			"default": "Submitted",
 			"width": "100px"
 		}
