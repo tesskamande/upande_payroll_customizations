@@ -95,7 +95,7 @@ def get_data(filters):
             docstatus_map = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
-    # Sort alphabetically first (will be sorted numerically later in Python)
+    
     query = query.orderby(employee.employee_number)
     result_rows = query.run(as_dict=True)
 
