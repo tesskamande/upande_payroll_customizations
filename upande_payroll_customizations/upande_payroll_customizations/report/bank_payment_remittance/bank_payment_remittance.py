@@ -78,7 +78,6 @@ def get_data(filters):
             employee.bank_ac_no.as_("bank_ac_no"),
             salary_slip.net_pay.as_("amount")
         )
-        .where(salary_slip.docstatus == 1)  # Only submitted salary slips
     )
 
     # Apply filters
