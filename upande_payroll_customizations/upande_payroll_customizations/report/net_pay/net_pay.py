@@ -58,13 +58,6 @@ def get_columns():
     ]
 
 
-def get_numeric_part(emp_num):
-    """Extract numeric part from employee number for proper sorting"""
-    if emp_num:
-        match = re.search(r'\d+', str(emp_num))
-        return int(match.group()) if match else 0
-    return 0
-
 
 def get_data(filters):
     """Fetch Net Pay, Gross Pay, and Total Deductions from Salary Slips"""
@@ -96,7 +89,6 @@ def get_data(filters):
             query = query.where(salary_slip.docstatus == docstatus_map[filters.get("docstatus")])
 
     
-    query = query.orderby(employee.employee_number)
     result_rows = query.run(as_dict=True)
 
     # Process data
@@ -110,7 +102,5 @@ def get_data(filters):
             "net_pay": row.net_pay or 0.0
         })
 
-    # Sort by numeric part of employee_number for proper ordering (PK1, PK2, ... PK29, PK30)
-    data.sort(key=lambda x: get_numeric_part(x.get('employee_number')))
-
+    
     return data

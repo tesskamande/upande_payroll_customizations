@@ -335,7 +335,7 @@ def get_data(filters):
                 emp[component_fieldname] = 0.00
 
         for component in deduction_components:
-            if component not in ["NSSF TIER 1", "NSSF TIER2"]:
+            if component not in ["NSSF Tier 1", "NSSF Tier 2"]:
                 component_fieldname = component.lower().replace(" ", "_")
                 if component_fieldname not in emp:
                     emp[component_fieldname] = 0.00
@@ -352,5 +352,5 @@ def get_data(filters):
                 emp[key] = round(float(emp[key]), 2)
         data.append(emp)
 
-    data = sorted(data, key=lambda x: x.get("employee_number", ""))
+  
     return data
