@@ -251,6 +251,7 @@ scheduler_events = {
 fixtures =[
     "Server Script",
     "Client Script",
-    "Workflow"
-    
+    "Workflow",
+    "Salary Component",
+    "Salary Structure"
 ]
