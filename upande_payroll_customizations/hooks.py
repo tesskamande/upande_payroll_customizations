@@ -254,4 +254,5 @@ fixtures =[
     "Workflow",
     "Salary Component",
     "Salary Structure"
+    
 ]
