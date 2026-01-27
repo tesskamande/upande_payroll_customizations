@@ -1,9 +1,0 @@
-# Copyright (c) 2025, dev@upande.com and Contributors
-# See license.txt
-
-# import frappe
-from frappe.tests.utils import FrappeTestCase
-
-
-class TestSubdepartmentDepartmentMapping(FrappeTestCase):
-	pass
