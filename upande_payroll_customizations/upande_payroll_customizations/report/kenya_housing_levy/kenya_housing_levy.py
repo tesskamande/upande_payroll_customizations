@@ -45,9 +45,9 @@ def get_columns():
         },
         {
             "label": _("Gross Salary"), 
-            "fieldname": "gross_pay", 
+            "fieldname": "gross_salary", 
             "fieldtype": "Float", 
-            "Precision": 2,
+            "precision": 2,
             "width": 150
         },
         {
@@ -97,7 +97,6 @@ def get_data(filters):
             employee.employee_name.as_("employee_name"),
             employee.custom_national_id.as_("custom_national_id"),
             employee.custom_kra_pin.as_("custom_kra_pin"),
-            salary_slip.gross_pay.as_("gross_pay"),  # Get gross_pay from salary slip
             sd.salary_component.as_("salary_component"),
             sd.amount.as_("amount"),
             sd.statistical_component.as_("statistical_component"),
@@ -128,16 +127,20 @@ def get_data(filters):
                 "custom_national_id": r.custom_national_id,
                 "employee_name": r.employee_name,
                 "custom_kra_pin": r.custom_kra_pin,
-                "gross_pay": r.gross_pay or 0,  
+                "gross_salary": r.gross_salary or 0,
                 "basic_salary": 0,
                 "member_contribution": 0,
                 "employer_contribution": 0,
                 "total_contribution": 0,
             }
 
-        # BASIC SALARY
+        
         if r.salary_component == "Basic Pay":
             result[key]["basic_salary"] += r.amount or 0
+
+
+        elif r.salary_component == "Gross Salary":
+            result[key]["gross_salary"] += r.amount or 0
 
         # EMPLOYEE HOUSING LEVY
         elif r.salary_component == "Housing Levy":
@@ -150,10 +153,9 @@ def get_data(filters):
     
     data = []
     for row in result.values():
-        
-        if row["employer_contribution"] == 0 and row["gross_pay"] > 0:
-            row["employer_contribution"] = row["gross_pay"] * 0.015
-        
+       
+        if row["employer_contribution"] == 0 and row["gross_salary"] > 0:
+            row["employer_contribution"] = row["gross_salary"] * 0.015
         row["total_contribution"] = row["member_contribution"] + row["employer_contribution"]
         data.append(row)
 
