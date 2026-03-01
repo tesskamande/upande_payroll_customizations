@@ -38,13 +38,13 @@ def get_columns():
 		{
 			"label": _("Gross Pay"),
 			"fieldname": "gross_pay",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
 			"width": 120
 		},
 		{
 			"label": _("Net Pay"),
 			"fieldname": "net_pay",
-			"fieldtype": "Currency",
+			"fieldtype": "Float",
 			"width": 120
 		},
 		{

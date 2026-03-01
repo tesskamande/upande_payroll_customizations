@@ -37,21 +37,21 @@ def get_columns():
         {
             "label": _("GROSS PAY"),
             "fieldname": "gross_pay",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
             "precision": 2,
             "width": 150
         },
         {
             "label": _("TOTAL DEDUCTIONS"),
             "fieldname": "total_deduction",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
             "precision": 2,
             "width": 150
         },
         {
             "label": _("NET PAY"),
             "fieldname": "net_pay",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
             "precision": 2,
             "width": 150
         }

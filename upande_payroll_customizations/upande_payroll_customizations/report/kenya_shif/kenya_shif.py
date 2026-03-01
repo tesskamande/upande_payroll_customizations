@@ -58,7 +58,7 @@ def get_columns():
         {
             "label": _("SHIF DEDUCTION"),
             "fieldname": "amount",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
             "precision": 2,
             "width": 150
         },

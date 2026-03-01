@@ -55,13 +55,21 @@ def get_columns():
         {
             "label": _("GROSS PAY"),
             "fieldname": "gross_pay",
-            "fieldtype": "Currency",
+            "fieldtype": "Float",
+            "precision": 2,
             "width": 150
         },
         {
             "label": _("VOLUNTARY"),
             "fieldname": "voluntary",
             "fieldtype": "Int",
+            "width": 120
+        },
+        {
+            "label": _("NSSF Contribution"),
+            "fieldname": "nssf_contribution",
+            "fieldtype": "Float",
+            "precision": 2,
             "width": 120
         }
     ]
