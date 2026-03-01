@@ -2,6 +2,17 @@
  {
   "docstatus": 0,
   "doctype": "Client Script",
+  "dt": "Salary Slip",
+  "enabled": 1,
+  "modified": "2025-11-19 02:11:07.764009",
+  "module": null,
+  "name": "1/3 Rule Breach",
+  "script": "frappe.ui.form.on('Salary Slip', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
   "dt": "Disciplinary",
   "enabled": 1,
   "modified": "2025-11-18 23:31:00.298996",
@@ -13,12 +24,23 @@
  {
   "docstatus": 0,
   "doctype": "Client Script",
+  "dt": "Report",
+  "enabled": 1,
+  "modified": "2026-02-27 16:00:48.077166",
+  "module": null,
+  "name": "Freeze Columns",
+  "script": "// Reference the Report Column child table to freeze first two columns\nfrappe.ui.form.on('Report Column', {\n    // When columns are added or modified\n    form_render: function(frm, cdt, cdn) {\n        freeze_first_two_columns(frm);\n    },\n    \n    // When a new column is added\n    columns_add: function(frm, cdt, cdn) {\n        freeze_first_two_columns(frm);\n    },\n    \n    // When column order changes\n    columns_move: function(frm, cdt, cdn) {\n        freeze_first_two_columns(frm);\n    },\n    \n    // When a column is removed\n    columns_remove: function(frm, cdt, cdn) {\n        freeze_first_two_columns(frm);\n    }\n});\n\nfunction freeze_first_two_columns(frm) {\n    // Check if columns child table exists\n    if (!frm.doc.columns || !frm.doc.columns.length) return;\n    \n    // Loop through all columns in the child table\n    frm.doc.columns.forEach(function(row, index) {\n        // Set 'freeze' property for first two columns (index 0 and 1)\n        if (index < 2) {\n            frappe.model.set_value(row.doctype, row.name, 'freeze', 1);\n        } else {\n            frappe.model.set_value(row.doctype, row.name, 'freeze', 0);\n        }\n    });\n    \n    // Refresh the columns table to show changes\n    frm.refresh_field('columns');\n    \n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
   "dt": "Employee",
   "enabled": 1,
-  "modified": "2025-11-24 10:39:20.449627",
-  "module": null,
-  "name": "employee update",
-  "script": "frappe.ui.form.on('Employee', {\n    onload: function(frm) {\n        if (frm.is_new() && !frm.doc.employee_number) {\n            frm.set_value('employee_number', 'Generating...');\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: {\n                    doctype: 'Employee',\n                    fields: ['employee_number'],\n                    filters: [\n                        ['employee_number', 'is', 'set'],\n                        ['employee_number', '!=', '']\n                    ],\n                    limit_page_length: 1000\n                },\n                callback: function(r) {\n                    let nextNumber = 1;\n                    if (r.message && r.message.length > 0) {\n                        // Extract numeric part only, ignoring any prefix (like PK)\n                        const numbers = r.message.map(e => {\n                            const match = e.employee_number.match(/\\d+/);\n                            return match ? parseInt(match[0]) : 0;\n                        });\n                        const maxNum = Math.max(...numbers);\n                        if (!isNaN(maxNum)) {\n                            nextNumber = maxNum + 1;\n                        }\n                    }\n                    // ✅ Add PK prefix to the number\n                    frm.set_value('employee_number', 'PK' + nextNumber.toString());\n                    console.log(\"Generated employee number:\", 'PK' + nextNumber);\n                }\n            });\n        }\n    }\n});",
+  "modified": "2026-03-01 20:01:38.389106",
+  "module": "Upande Payroll Customizations",
+  "name": "Employee_number update",
+  "script": "frappe.ui.form.on('Employee', {\n    onload: function(frm) {\n        if (frm.is_new() && !frm.doc.employee_number) {\n            frm.set_value('employee_number', 'Generating...');\n            frappe.call({\n                method: 'frappe.client.get_list',\n                args: {\n                    doctype: 'Employee',\n                    fields: ['employee_number'],\n                    filters: [\n                        ['employee_number', 'is', 'set'],\n                        ['employee_number', '!=', '']\n                    ],\n                    limit_page_length: 1000\n                },\n                callback: function(r) {\n                    let nextNumber = 1;\n                    if (r.message && r.message.length > 0) {\n                        const numbers = r.message.map(e => {\n                            const match = e.employee_number.match(/\\d+/);\n                            return match ? parseInt(match[0]) : 0;\n                        });\n                        const maxNum = Math.max(...numbers);\n                        if (!isNaN(maxNum)) {\n                            nextNumber = maxNum + 1;\n                        }\n                    }\n                    frm.set_value('employee_number', 'PK' + nextNumber.toString());\n                }\n            });\n        }\n    }\n});",
   "view": "Form"
  }
 ]
