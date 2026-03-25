@@ -146,7 +146,7 @@ def get_p10_report_data(filters):
         "total_cash_pay": ["Basic Pay", "House Allowance", "Transport Allowance", 
                           "Chemical Allowance", "Cold Room Allowance", "Grading Bonus", 
                           "Loading Allowance", "Holiday Overtime", "Overtime", "Responsibility Allowance", 
-                          "Travelling Allowance"],
+                          "Travelling Allowance", "Absence Amount"],
         
         # Deductions
         "mortgage_interest": ["Mortgage Interest"],

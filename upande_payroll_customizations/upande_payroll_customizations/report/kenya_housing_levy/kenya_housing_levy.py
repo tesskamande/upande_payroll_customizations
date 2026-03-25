@@ -71,6 +71,7 @@ def get_columns():
             "label": _("Total Contribution"), 
             "fieldname": "total_contribution", 
             "fieldtype": "Currency", 
+            "precision": 2,
             "width": 150
         },
     ]
